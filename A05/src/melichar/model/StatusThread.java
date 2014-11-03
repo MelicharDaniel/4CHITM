@@ -64,10 +64,10 @@ public class StatusThread extends Thread {
                 e.printStackTrace();
             }
 
-            if (TextPane_1) this.lv.setProductTextPane_1Text(this.lv.getProductTextPane_1Text() + '\n' + lm.get());
-            if (TextPane_2) this.lv.setProductTextPane_2Text(this.lv.getProductTextPane_2Text() + '\n' + lm.get());
-            if (TextPane_3) this.lv.setProductTextPane_3Text(this.lv.getProductTextPane_3Text() + '\n' + lm.get());
-            if (TextPane_4) this.lv.setProductTextPane_4Text(this.lv.getProductTextPane_4Text() + '\n' + lm.get());
+            if (TextPane_1) this.lv.setProductTextPane_1Text(this.lv.getProductTextPane_1Text() + '\n' + lm.get() + '\n');
+            if (TextPane_2) this.lv.setProductTextPane_2Text(this.lv.getProductTextPane_2Text() + '\n' + lm.get() + '\n');
+            if (TextPane_3) this.lv.setProductTextPane_3Text(this.lv.getProductTextPane_3Text() + '\n' + lm.get() + '\n');
+            if (TextPane_4) this.lv.setProductTextPane_4Text(this.lv.getProductTextPane_4Text() + '\n' + lm.get() + '\n');
         }
     }
 }

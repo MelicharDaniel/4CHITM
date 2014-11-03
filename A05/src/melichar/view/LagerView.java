@@ -33,18 +33,7 @@ public class LagerView extends JFrame {
 
     public LagerView(LagerControl lc) {
         this.lc = lc;
-        report();
         init();
-    }
-
-    private void report() {
-        JOptionPane.showMessageDialog(  null,
-                                       "Stand: 29.10.2014 \n" +
-                                        "Funktionalität des Removes-Buttons \n" +
-                                        "Richtiges aufteilen der Produkte \n" +
-                                        "Kommentare \n" +
-                                        "\"Spezialisierung\"",
-                                        "To-Do / Errors", JOptionPane.PLAIN_MESSAGE);
     }
 
     private void init() {
