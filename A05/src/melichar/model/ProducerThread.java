@@ -7,14 +7,20 @@ package melichar.model;
 public class ProducerThread extends Thread {
 
     private Warehouse lm;
+    private boolean isRunning;
 
     public ProducerThread(Warehouse lm) {
         this.lm = lm;
+        this.isRunning = true;
+    }
+
+    public void setRunning(boolean isRunning) {
+        this.isRunning = isRunning;
     }
 
     @Override
     public void run() {
-        while (true) {
+        while (isRunning) {
             lm.add();
         }
     }

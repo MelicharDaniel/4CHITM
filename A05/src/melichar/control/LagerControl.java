@@ -8,6 +8,7 @@ import melichar.view.LagerView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedHashMap;
 
 /**
  * @author Daniel Melichar
@@ -15,40 +16,52 @@ import java.awt.event.ActionListener;
  */
 public class LagerControl implements ActionListener {
 
-    private Warehouse[] lm;
+    private Warehouse lm;
     private LagerView lv;
+    private LinkedHashMap<String,ProducerThread> pt;
+    private LinkedHashMap<String,ConsumerThread> ct;
+    private LinkedHashMap<String,StatusThread> st;
 
     public LagerControl() {
-        this.lm = new Warehouse[5];
-        for (int x = 0; x < 5; x++) {
-            lm[x] = new Warehouse();
-        }
-
-        this.lv = new LagerView(this.lm[0], this);
+        this.lm = new Warehouse();
+        this.lv = new LagerView(this);
+        pt = new LinkedHashMap<String, ProducerThread>();
+        ct = new LinkedHashMap<String, ConsumerThread>();
+        st = new LinkedHashMap<String, StatusThread>();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
         /* BUTTONS */
         if (e.getSource() == this.lv.getAddButton()) {
-            int x = this.lv.getTotalProducts();
+            String addedProduct = this.lv.getAddTextFieldText();
+            this.lm.setProduct(addedProduct);
+
+            pt.put(addedProduct, new ProducerThread(this.lm));
+            ct.put(addedProduct, new ConsumerThread(this.lm));
+            st.put(addedProduct, new StatusThread(this.lm, this.lv));
+
+            pt.get(addedProduct).start();
+            ct.get(addedProduct).start();
+            st.get(addedProduct).start();
 
             this.lv.totalProductsPlus();
-            new ProducerThread(this.lm[x + 1]).start();
-            new ConsumerThread(this.lm[x + 1]).start();
-            new StatusThread(this.lm[x + 1], this.lv).start();
-
-            this.lm[x + 1].setProduct(this.lv.getAddTextFieldText());
         }
 
         if (e.getSource() == this.lv.getRemoveButton()) {
-            // TODO
+            String delete = this.lv.getRemoveTextFieldText();
+
+            if (pt.containsKey(delete)) { pt.get(delete).setRunning(false); }
+            if (ct.containsKey(delete)) { ct.get(delete).setRunning(false); }
+            if (st.containsKey(delete)) { st.get(delete).setRunning(false); }
+
+            this.lv.totalProductsMinus();
         }
 
         /* RADIOBUTTONS */
         if (e.getSource() == this.lv.getProductRadio1()) {
             if (this.lv.getProductRadio1().isSelected()) {
-                // Wenn es jetzt selected wurde
                 this.lv.setProductTextPane_1Visibility(true);
             } else {
                 this.lv.setProductTextPane_1Visibility(false);
@@ -56,7 +69,6 @@ public class LagerControl implements ActionListener {
         }
         if (e.getSource() == this.lv.getProductRadio2()) {
             if (this.lv.getProductRadio2().isSelected()) {
-                // Wenn es jetzt selected wurde
                 this.lv.setProductTextPane_2Visibility(true);
             } else {
                 this.lv.setProductTextPane_2Visibility(false);
@@ -64,7 +76,6 @@ public class LagerControl implements ActionListener {
         }
         if (e.getSource() == this.lv.getProductRadio3()) {
             if (this.lv.getProductRadio3().isSelected()) {
-                // Wenn es jetzt selected wurde
                 this.lv.setProductTextPane_3Visibility(true);
             } else {
                 this.lv.setProductTextPane_3Visibility(false);
@@ -72,7 +83,6 @@ public class LagerControl implements ActionListener {
         }
         if (e.getSource() == this.lv.getProductRadio4()) {
             if (this.lv.getProductRadio4().isSelected()) {
-                // Wenn es jetzt selected wurde
                 this.lv.setProductTextPane_4Visibility(true);
             } else {
                 this.lv.setProductTextPane_4Visibility(false);

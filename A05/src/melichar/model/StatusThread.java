@@ -12,6 +12,7 @@ public class StatusThread extends Thread {
 
     private Warehouse lm;
     private LagerView lv;
+    private boolean isRunning;
     private boolean TextPane_1;
     private boolean TextPane_2;
     private boolean TextPane_3;
@@ -20,6 +21,7 @@ public class StatusThread extends Thread {
     public StatusThread(Warehouse lm, LagerView lv) {
         this.lm = lm;
         this.lv = lv;
+        this.isRunning = true;
 
         switch (this.lv.getTotalProducts()) {
             case 0:
@@ -49,8 +51,12 @@ public class StatusThread extends Thread {
         }
     }
 
+    public void setRunning(boolean isRunning) {
+        this.isRunning = isRunning;
+    }
+
     public void run() {
-        while (true) {
+        while (isRunning) {
             long i = (new Random().nextInt(10)) * 1000;
             try {
                 Thread.sleep(i);

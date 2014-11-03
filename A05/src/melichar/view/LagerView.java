@@ -1,7 +1,6 @@
 package melichar.view;
 
 import melichar.control.LagerControl;
-import melichar.model.Warehouse;
 
 import javax.swing.*;
 
@@ -14,8 +13,6 @@ public class LagerView extends JFrame {
     private LagerControl lc;
 
     private JPanel layoutPanel;
-    private JPanel addPanel;
-    private JPanel removePanel;
     private JTextField addTextField;
     private JTextField removeTextField;
     private JButton addButton;
@@ -34,7 +31,7 @@ public class LagerView extends JFrame {
     private JScrollPane productScrollPane_4;
     private JLabel totalProducts;
 
-    public LagerView(Warehouse lm, LagerControl lc) {
+    public LagerView(LagerControl lc) {
         this.lc = lc;
         report();
         init();
@@ -52,7 +49,7 @@ public class LagerView extends JFrame {
 
     private void init() {
         this.setContentPane(this.layoutPanel);
-        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);;
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.pack();
         this.setVisible(true);
@@ -111,20 +108,26 @@ public class LagerView extends JFrame {
 
     public String getAddTextFieldText() { return addTextField.getText(); }
 
+    public String getRemoveTextFieldText() {return removeTextField.getText();}
+
     public void setProductTextPane_1Visibility(boolean vis) {
         this.productTextPane_1.setVisible(vis);
+        this.productScrollPane_1.setVisible(vis);
     }
 
     public void setProductTextPane_2Visibility(boolean vis) {
         this.productTextPane_2.setVisible(vis);
+        this.productScrollPane_2.setVisible(vis);
     }
 
     public void setProductTextPane_3Visibility(boolean vis) {
         this.productTextPane_3.setVisible(vis);
+        this.productScrollPane_3.setVisible(vis);
     }
 
     public void setProductTextPane_4Visibility(boolean vis) {
         this.productTextPane_4.setVisible(vis);
+        this.productScrollPane_4.setVisible(vis);
     }
 
     public JRadioButton getProductRadio1() {
