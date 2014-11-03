@@ -1,4 +1,7 @@
-package melichar;
+package melichar.view;
+
+import melichar.control.LagerControl;
+import melichar.model.Warehouse;
 
 import javax.swing.*;
 
@@ -31,7 +34,7 @@ public class LagerView extends JFrame {
     private JScrollPane productScrollPane_4;
     private JLabel totalProducts;
 
-    public LagerView(LagerModel lm, LagerControl lc) {
+    public LagerView(Warehouse lm, LagerControl lc) {
         this.lc = lc;
         report();
         init();

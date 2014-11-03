@@ -1,5 +1,7 @@
 package melichar;
 
+import melichar.control.LagerControl;
+
 /**
  * @author Daniel Melichar
  * @version 29.10.2014

@@ -1,4 +1,4 @@
-package melichar;
+package melichar.model;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -8,20 +8,18 @@ import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @author Daniel Melichar
- * @version 29.10.2014
+ * @version 03.11.2014
  */
-public class LagerModel {
+public class Warehouse {
 
-    /* Attribute */
     private String product;
-    private LinkedList<String> data;       // Beinhaltet alle Timestamps
-    private ReentrantLock lock;             // wird Verwendet um synchronized-Threads zu schließen
-    private Condition notFull;              // Überprüft ob der Thread voll ist
-    private Condition notEmpty;             // Überprüft ob der Thread leer ist
-    private SimpleDateFormat date;          // Für die Ausgabe der Timestamps
+    private LinkedList<String> data;
+    private ReentrantLock lock;
+    private Condition notFull;
+    private Condition notEmpty;
+    private SimpleDateFormat date;
 
-    public LagerModel() {
-        // Initsialisierung der Attribute
+    public Warehouse() {
         product = "";
         data = new LinkedList<String>();
         date = new SimpleDateFormat("YYYY-MM-DD @ hh:mm:ss:SSS");
@@ -30,11 +28,7 @@ public class LagerModel {
         notEmpty = lock.newCondition();
     }
 
-    /**
-     * Fügt product(e) ins Lager hinzu
-     */
     public void add() {
-        // Schließt den Thread
         lock.lock();
 
         try {
@@ -58,9 +52,7 @@ public class LagerModel {
         this.product = product;
     }
 
-    /**
-     * Löscht product(e) aus dem Lager
-     */
+
     public void delete() {
         lock.lock();
 
@@ -77,11 +69,6 @@ public class LagerModel {
         }
     }
 
-    /**
-     * Wird von StatusThread verwendet für die Consolen-Ausgabe
-     *
-     * @return die Anzahl, der im Lager vorhandenen producte und die Timestamps
-     */
     public String get() {
         lock.lock();
 
@@ -91,4 +78,5 @@ public class LagerModel {
             lock.unlock();
         }
     }
+
 }
