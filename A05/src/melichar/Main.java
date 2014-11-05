@@ -1,6 +1,6 @@
 package melichar;
 
-import melichar.control.LagerControl;
+import melichar.control.Controller;
 
 /**
  * @author Daniel Melichar
@@ -9,6 +9,6 @@ import melichar.control.LagerControl;
 public class Main {
 
     public static void main(String[] args) {
-        new LagerControl();
+        new Controller();
     }
 }

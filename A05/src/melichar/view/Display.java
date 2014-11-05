@@ -1,16 +1,19 @@
 package melichar.view;
 
-import melichar.control.LagerControl;
+import melichar.control.Controller;
 
 import javax.swing.*;
 
 /**
+ * Display (GUI) for the Warehouse(s).
+ * Created using IntelliJ's GUI-Form builder
  * @author Daniel Melichar
  * @version 29.10.2014
  */
-public class LagerView extends JFrame {
+public class Display extends JFrame {
 
-    private LagerControl lc;
+    /* ATTRIBUTES */
+    private Controller lc;
 
     private JPanel layoutPanel;
     private JTextField addTextField;
@@ -31,18 +34,23 @@ public class LagerView extends JFrame {
     private JScrollPane productScrollPane_4;
     private JLabel totalProducts;
 
-    public LagerView(LagerControl lc) {
+    public Display(Controller lc) {
         this.lc = lc;
         init();
     }
 
+    /**
+     * Initialises the GUI and builds all Windows
+     */
     private void init() {
+        /* Default JFrame settings */
         this.setContentPane(this.layoutPanel);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.pack();
         this.setVisible(true);
 
+        /* ActionListeners for all Buttons */
         this.addButton.addActionListener(this.lc);
         this.removeButton.addActionListener(this.lc);
         this.productRadio1.addActionListener(this.lc);
@@ -50,6 +58,8 @@ public class LagerView extends JFrame {
         this.productRadio3.addActionListener(this.lc);
         this.productRadio4.addActionListener(this.lc);
     }
+
+    /* GETTER & SETTER */
 
     public int getTotalProducts() {
         return Integer.parseInt(this.totalProducts.getText());
